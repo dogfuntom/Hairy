@@ -9,7 +9,8 @@
 	});
 
 	let noiseScale = 0.0625;
-	let height = 55;
+	let speed = 2;
+	let letter = "g";
 
 	const sketch = (it) => {
 		const width = 400;
@@ -42,7 +43,7 @@
 			it.fill(0);
 			g = it.createGraphics(width, height, "p2d");
 			g.textSize(300);
-			g.text("G", it.width / 32, it.height / 1.3);
+			g.text(letter, it.width / 3, it.height / 1.5);
 			g.loadPixels();
 			for (let i_1 = 0; i_1 <= pointsNumber - 1; i_1++) {
 				points[i_1] = randomPoint();
@@ -57,7 +58,7 @@
 				let p_1 = points[i_2];
 				p_1 = p_1.add(
 					it.createVector(
-						2 *
+						speed *
 							(it.noise(
 								p_1.x * noiseScale,
 								p_1.y * noiseScale,
@@ -65,7 +66,7 @@
 							) *
 								2 -
 								1),
-						2 *
+						speed *
 							(it.noise(
 								p_1.x * noiseScale,
 								p_1.y * noiseScale,
@@ -84,6 +85,7 @@
 	};
 
 	let engine;
+	let manager;
 </script>
 
 <svelte:head>
@@ -91,19 +93,26 @@
 </svelte:head>
 
 <label>
+	Letter
+	<input type="text" bind:value={letter} minlength="1" maxlength="1"
+		on:change="{manager.restart()}" />
+</label>
+
+<label>
 	Noise scale
 	<input type="range" bind:value={noiseScale} min="{0.0625/4}" max="{0.0625*4}" step="0.01"
-		on:change="{engine.frameRate(engine.frameRate()-1)}" />
+		on:change="{manager.restart()}" />
 	{noiseScale}
 </label>
 
 <label>
-	Height
-	<input type="range" bind:value={height} min="100" max="1000" step="0.01" />
-	{height}
+	Speed
+	<input type="range" bind:value={speed} min="1" max="8" step="0.01"
+		on:change="{manager.restart()}" />
+	{speed}
 </label>
 
-<svelte:component this={P5} {sketch} bind:engine={engine} />
+<svelte:component this={P5} {sketch} bind:engine={engine} bind:this={manager} />
 
 <style>
 	h1,

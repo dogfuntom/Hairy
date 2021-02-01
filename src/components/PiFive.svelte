@@ -3,7 +3,15 @@
   export let sketch = null;
   export let engine = null;
 
+  let holder = null;
+
+  export function restart() {
+    engine.remove();
+    engine = _p5(holder, sketch);
+  }
+
   function foo(node, workspace) {
+    holder = node;
     engine = _p5(node, workspace);
     return engine;
   }
