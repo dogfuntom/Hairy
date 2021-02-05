@@ -1,6 +1,6 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "hairy",
+  "description": "Hairy p5.js",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
@@ -12,7 +12,8 @@
     "@types/p5": "^0.9.1",
     "compression": "^1.7.1",
     "polka": "next",
-    "sirv": "^1.0.0"
+    "sirv": "^1.0.0",
+    "terminal.css": "^0.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

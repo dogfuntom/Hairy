@@ -4,11 +4,20 @@
 		{
 			"type": "npm",
 			"script": "dev",
-			"problemMatcher": [],
+			"problemMatcher": "$eslint-stylish",
 			"label": "npm: dev",
 			"detail": "sapper dev",
 			"group": { "kind": "build", "isDefault": true },
 			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "export",
+			"problemMatcher": "$eslint-stylish",
+			"label": "npm: export",
+			"detail": "sapper export",
+			"group": "build",
+			"isBackground": false
 		}
 	]
 }
