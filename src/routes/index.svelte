@@ -2,8 +2,10 @@
 	import { onMount } from "svelte";
 
 	let P5;
-
+	let isRu = false;
 	onMount(async () => {
+		isRu = /^ru\b/.test(navigator.language);
+
 		const module = await import("../components/PiFive.svelte");
 		P5 = module.default;
 	});
@@ -89,7 +91,11 @@
 </script>
 
 <svelte:head>
+{#if isRu}
+	<title>Привет мир</title>
+{:else}
 	<title>Sapper project template</title>
+{/if}
 </svelte:head>
 
 <label>
