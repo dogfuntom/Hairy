@@ -1,8 +1,6 @@
 <script>
 	// TODO: Add more inputs.
-	// TODO: Clean up code in the scetch itself.
 	// TODO: Squash failed, redundant or overly verbose commits. Upload to GitHub.
-	// TODO: Try blog for tutorial.
 	import { onMount } from "svelte";
 
 	/** @type {typeof import("../components/PiFive.svelte").default} */
@@ -22,42 +20,48 @@
 	const sketch = (p5) => {
 		const width = 400;
 		const height = 400;
+
 		const pointsNumber = 128;
 		const points = Array(pointsNumber);
-		let g = null;
-		const randomPoint = () => {
-			const shouldSkip = (tupledArg) => {
-				const pixels = tupledArg[0];
-				const x = tupledArg[1] | 0;
-				const y = tupledArg[2] | 0;
+
+		// The p5.Graphics that contains foreground (the letter) in it.
+		let foregroundGraphics = null;
+
+		const getRandomPointOnForeground = () => {
+			const isBackground = (pixels, x, y) => {
+				// const pixels = tupledArg[0];
+				// const x = tupledArg[1] | 0;
+				// const y = tupledArg[2] | 0;
 				const i = ((y * height + x) * 4) | 0;
 				return ~~pixels[i + 3] < 127;
 			};
-			let x_1 = 0;
-			let y_1 = 0;
+			let x = 0;
+			let y = 0;
 			while (
-				((x_1 = ~~Math.floor(p5.random(width)) | 0),
-				((y_1 = ~~Math.floor(p5.random(height)) | 0),
-				shouldSkip([g.pixels, x_1, y_1])))
+				((x = ~~Math.floor(p5.random(width)) | 0),
+				((y = ~~Math.floor(p5.random(height)) | 0),
+				isBackground(foregroundGraphics.pixels, x, y)))
 			) {}
-			return p5.createVector(x_1, y_1);
+			return p5.createVector(x, y);
 		};
+
 		p5.setup = () => {
 			p5.createCanvas(width, height, "p2d");
 			p5.background(200);
 			p5.noiseSeed(10);
 			p5.noStroke();
 			p5.fill(0);
-			g = p5.createGraphics(width, height, "p2d");
-			g.textSize(300);
-			g.text(letter, p5.width / 3, p5.height / 1.5);
-			g.loadPixels();
+			foregroundGraphics = p5.createGraphics(width, height, "p2d");
+			foregroundGraphics.textSize(300);
+			foregroundGraphics.text(letter, p5.width / 3, p5.height / 1.5);
+			foregroundGraphics.loadPixels();
 			for (let i_1 = 0; i_1 <= pointsNumber - 1; i_1++) {
-				points[i_1] = randomPoint();
+				points[i_1] = getRandomPointOnForeground();
 			}
 		};
+
 		p5.draw = () => {
-			p5.image(g, 0, 0);
+			p5.image(foregroundGraphics, 0, 0);
 			points.forEach((p) => {
 				p5.circle(p.x, p.y, 0.5);
 			});
@@ -85,7 +89,7 @@
 				);
 				points[i_2] = p_1;
 				if (p5.random() < 0.0625) {
-					points[i_2] = randomPoint();
+					points[i_2] = getRandomPointOnForeground();
 				}
 			}
 		};

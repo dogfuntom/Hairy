@@ -1,5 +1,5 @@
 <script>
-  import _p5 from './PiFiveAction';
+  import P5 from './PiFiveAction';
   export let sketch = null;
   export let engine = null;
 
@@ -7,12 +7,15 @@
 
   export function restart() {
     engine.remove();
-    engine = _p5(holder, sketch);
+    engine = P5(holder, sketch);
   }
 
+  /**
+  * @param {HTMLElement} node
+  */
   function foo(node, workspace) {
     holder = node;
-    engine = _p5(node, workspace);
+    engine = P5(node, workspace);
     return engine;
   }
 </script>

@@ -1,6 +1,6 @@
 import p5 from 'p5';
 
-export default function _p5(node, workspace) {
+export default function P5(node, workspace) {
   return new p5(
     (instance) => (workspace ? workspace(instance) : fallback(instance)),
     node
