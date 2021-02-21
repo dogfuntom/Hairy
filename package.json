@@ -16,6 +16,7 @@
     "terminal.css": "^0.7.2"
   },
   "devDependencies": {
+    "98.css": "^0.1.16",
     "@babel/core": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",

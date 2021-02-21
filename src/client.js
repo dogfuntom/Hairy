@@ -1,5 +1,5 @@
 import * as sapper from '@sapper/app';
-import 'terminal.css';
+import '98.css';
 
 sapper.start({
 	target: document.querySelector('#sapper')
