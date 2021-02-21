@@ -1,9 +1,16 @@
+.example {
+	margin: 16px 0;
+	padding: 12px 24px;
+	border-left: 1px solid #808080;
+}
+
 body {
 	margin: 0;
 	font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 	font-size: 14px;
 	line-height: 1.5;
 	color: #333;
+	background: #c0c0c0;
 }
 
 h1, h2, h3, h4, h5, h6 {
